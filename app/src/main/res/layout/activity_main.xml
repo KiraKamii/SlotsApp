@@ -65,14 +65,34 @@
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"/>
 
+    <LinearLayout
+        android:id="@+id/rvLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/msg"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:textSize="20dp"
+            android:textColor="@color/casino_green"
+            android:text="Choose your bet ▼" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:text="Start"
-        android:layout_marginTop="0dp"
-        android:layout_below="@id/msg"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/rvLayout"
         android:textColor="@color/white"
         android:background="@drawable/circle_button"
         android:layout_centerHorizontal="true"/>

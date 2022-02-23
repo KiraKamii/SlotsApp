@@ -1,16 +1,22 @@
 package com.CarlosJimenez.SlotsApp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    //dropdown
+    AppCompatTextView tvPicker;
 
     private TextView msg;
     private ImageView img1, img2, img3;
@@ -33,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         img3 = findViewById(R.id.img3);
         btn = findViewById(R.id.btn);
         msg = findViewById(R.id.msg);
+
+        //dropdown
+        tvPicker = findViewById(R.id.tvPicker);
+        tvPicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCategoryMenu();
+            }
+        });
 
         btn.setOnClickListener(view -> {
             //if btn pressed while reels are running
@@ -80,9 +95,31 @@ public class MainActivity extends AppCompatActivity {
                 isStarted = true;
             }
         });
-
-
-
-
     }
+
+
+    //dropdown
+    private void showCategoryMenu(){
+        final CategoryDropdownMenu menu = new CategoryDropdownMenu(this);
+        menu.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        menu.setWidth(getPxFromDp(200));
+        menu.setOutsideTouchable(true);
+        menu.setFocusable(true);
+        menu.showAsDropDown(tvPicker);
+        menu.setCategorySelectedListener(new CategoryDropdownAdapter.CategorySelectedListener() {
+            @Override
+            public void onCategorySelected(int position, Category category) {
+                menu.dismiss();
+                Toast.makeText(MainActivity.this, "Your bet has been set at : $"+ category.category, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //Convert DP to Pixel
+    private int getPxFromDp(int dp){
+        return (int) (dp * getResources().getDisplayMetrics().density);
+    }
+
+
+
 }
