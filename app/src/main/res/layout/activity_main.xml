@@ -7,27 +7,42 @@
     android:paddingBottom="16dp"
     android:paddingTop="16dp"
     tools:context=".MainActivity"
-    android:background="#FFFFFF">
+    android:background="@color/casino_green">
+
+    <TextView
+        android:id="@+id/money_counter"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:textColor="@color/casino_green"
+        android:text="$1000"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:id="@+id/imgs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_below="@id/money_counter"
         android:layout_centerHorizontal="true">
 
         <ImageView
             android:id="@+id/img1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/slot6"/>
 
         <ImageView
             android:id="@+id/img2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:src="@drawable/slot6"/>
@@ -36,7 +51,7 @@
             android:id="@+id/img3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/slot6"/>
 
     </LinearLayout>
@@ -47,15 +62,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_below="@id/imgs"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"/>
+
 
     <Button
         android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:text="Start"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0dp"
         android:layout_below="@id/msg"
+        android:textColor="@color/white"
+        android:background="@drawable/circle_button"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
