@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,12 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         //dropdown
         tvPicker = findViewById(R.id.tvPicker);
-        tvPicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showCategoryMenu();
-            }
-        });
+        tvPicker.setOnClickListener(view -> showCategoryMenu());
 
         btn.setOnClickListener(view -> {
             //if btn pressed while reels are running
@@ -100,18 +94,15 @@ public class MainActivity extends AppCompatActivity {
 
     //dropdown
     private void showCategoryMenu(){
-        final CategoryDropdownMenu menu = new CategoryDropdownMenu(this);
+        final SetBetDropdownMenu menu = new SetBetDropdownMenu(this);
         menu.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         menu.setWidth(getPxFromDp(200));
         menu.setOutsideTouchable(true);
         menu.setFocusable(true);
         menu.showAsDropDown(tvPicker);
-        menu.setCategorySelectedListener(new CategoryDropdownAdapter.CategorySelectedListener() {
-            @Override
-            public void onCategorySelected(int position, Category category) {
-                menu.dismiss();
-                Toast.makeText(MainActivity.this, "Your bet has been set at : $"+ category.category, Toast.LENGTH_SHORT).show();
-            }
+        menu.setBetSelectedListener((position, setBet) -> {
+            menu.dismiss();
+            Toast.makeText(MainActivity.this, "Your bet has been set at : $"+ setBet.bet, Toast.LENGTH_SHORT).show();
         });
     }
 
