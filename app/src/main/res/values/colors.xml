@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="casino_green">#4E6A54</color>
     <color name="casino_red">#852928</color>
+    <color name="flag">#00FF00</color>
+    <color name="flag_2">#FF00FF</color>
 </resources>

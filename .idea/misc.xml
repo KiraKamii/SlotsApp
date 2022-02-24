@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-anydpi/settings.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/circle_button.xml" value="0.118" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.1" />
         <entry key="app/src/main/res/layout/popout_category.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/menu/settings_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.1" />
       </map>
     </option>
   </component>

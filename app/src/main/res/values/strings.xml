@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Slots App</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="difficulty_header">Difficulty</string>
+    <string name="easy_mode">Easy Mode</string>
+
 </resources>

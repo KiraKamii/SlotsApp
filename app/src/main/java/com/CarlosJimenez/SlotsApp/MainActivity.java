@@ -2,8 +2,15 @@ package com.CarlosJimenez.SlotsApp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.preference.PreferenceManager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private int currentBalance;
     private String tempStringCurrBalance;
 
+    //settings
+    private SharedPreferences mSharedPrefs;
+
     public static final Random RANDOM = new Random();
 
     public static long randomLong(long lower, long upper) {
@@ -49,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
         msg = findViewById(R.id.msg);
         curr_bet = findViewById(R.id.current_bet);
         curr_balance = findViewById(R.id.current_balance);
+
+        //settings
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean easyMode = mSharedPrefs.getBoolean("difficult",false);
+//        if (easyMode) {
+//            Log.d("DIFFICULTY", "True");
+//        } else {
+//            Log.d("DIFFICULTY", "False");
+//        }
 
 
         //temp curr balance
@@ -69,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     reel1.stopReel();
                     reel2.stopReel();
                     reel3.stopReel();
+
 
                     if (reel1.currentIndex == reel2.currentIndex && reel2.currentIndex == reel3.currentIndex) {
                         //JACKPOT
@@ -91,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "TRY AGAIN!", Toast.LENGTH_LONG).show();
                     }
 
+
                     btn.setText("Start");
                     isStarted = false;
 
@@ -107,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }, 3000); //3 sec delay
 
-
+                if(!easyMode){
                     reel1 = new Reel(img -> runOnUiThread(() ->
                             img1.setImageResource(img)),
                             200, randomLong(0, 200));
@@ -122,9 +143,29 @@ public class MainActivity extends AppCompatActivity {
 
                     reel3 = new Reel(img -> runOnUiThread(() ->
                             img3.setImageResource(img)),
-                            200, randomLong(300, 800)); //150,600 better odds
+                            200, randomLong(300, 800));
 
                     reel3.start();
+                } else{
+                    //Log.d("DIFFICULTY","easy mode spin");
+                    reel1 = new Reel(img -> runOnUiThread(() ->
+                            img1.setImageResource(img)),
+                            200, 10);
+
+                    reel1.start();
+
+                    reel2 = new Reel(img -> runOnUiThread(() ->
+                            img2.setImageResource(img)),
+                            200, 10);
+
+                    reel2.start();
+
+                    reel3 = new Reel(img -> runOnUiThread(() ->
+                            img3.setImageResource(img)),
+                            200, randomLong(0, 10));
+
+                    reel3.start();
+                }
 
                     btn.setText("Stop");
                     msg.setText("");
@@ -145,6 +186,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
+    //settings
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     //dropdown
     private void showCategoryMenu(){
