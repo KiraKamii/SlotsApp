@@ -17,7 +17,7 @@ public class SetBet {
 
     public static List<SetBet> generateBetsList(){
         List<SetBet> bets = new ArrayList<>();
-        String[] dollarBets = {"5", "25", "50", "100", "500", "1000"};
+        String[] dollarBets = {"5", "10", "50", "100", "500", "1000","5000","10000"};
 
         for(int i = 0; i < dollarBets.length; i++){
             bets.add(new SetBet(i, R.drawable.money_symbol, dollarBets[i]));
