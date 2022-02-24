@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isBetSet;
     private int dollarBet;
-    private int currentBalance;
+    private int currentBalance = 1000;
     private String tempStringCurrBalance;
 
     //settings
@@ -63,17 +63,23 @@ public class MainActivity extends AppCompatActivity {
         //settings
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean easyMode = mSharedPrefs.getBoolean("difficult",false);
+
 //        if (easyMode) {
 //            Log.d("DIFFICULTY", "True");
 //        } else {
 //            Log.d("DIFFICULTY", "False");
 //        }
 
+        //get balance
+        currentBalance = mSharedPrefs.getInt("balance",currentBalance);
 
         //temp curr balance
-        tempStringCurrBalance = curr_balance.getText().toString();
-        String tempNumsOnly = tempStringCurrBalance.replaceAll("[^0-9]", "");
-        currentBalance = Integer.parseInt(tempNumsOnly);
+//        tempStringCurrBalance = curr_balance.getText().toString();
+//        String tempNumsOnly = tempStringCurrBalance.replaceAll("[^0-9]", "");
+//        currentBalance = Integer.parseInt(tempNumsOnly);
+
+        //show balance
+        curr_balance.setText("Current Balance: $"+currentBalance);
 
         //dropdown
         tvPicker = findViewById(R.id.tvPicker);
@@ -111,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "TRY AGAIN!", Toast.LENGTH_LONG).show();
                     }
 
+
+                    //save balance
+                    SharedPreferences.Editor editor = mSharedPrefs.edit();
+                    editor.putInt("balance",currentBalance);
+                    editor.commit();
 
                     btn.setText("Start");
                     isStarted = false;

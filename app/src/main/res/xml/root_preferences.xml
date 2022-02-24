@@ -8,4 +8,9 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="Balance">
+            <Preference app:key="balanceBtn"
+                app:title="Increase balance by $1000"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>
